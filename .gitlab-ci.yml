@@ -1,7 +1,6 @@
 image: dylanops/php:7.4
 
 before_script:
-  - apt-get update
   - composer install
 
 stages:
