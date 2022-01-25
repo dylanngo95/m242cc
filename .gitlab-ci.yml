@@ -1,9 +1,5 @@
 image: dylanops/php:7.4
 
-cache:
-  paths:
-    - vendor/
-
 before_script:
   - apt-get update
   - composer install
