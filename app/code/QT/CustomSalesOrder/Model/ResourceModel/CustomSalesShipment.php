@@ -9,7 +9,6 @@ use QT\CustomSalesOrder\Model\CustomSalesShipmentFactory;
 
 /**
  * Class CustomSalesShipment
- * @package QT\CustomSalesOrder\Model\ResourceModel
  */
 class CustomSalesShipment extends AbstractDb
 {
@@ -21,7 +20,7 @@ class CustomSalesShipment extends AbstractDb
     /**
      * @var CustomSalesShipmentFactory
      */
-    private CustomSalesShipmentFactory $customSalesShipmentFactory;
+    private $customSalesShipmentFactory;
 
     /**
      * @inheritdoc
@@ -32,6 +31,12 @@ class CustomSalesShipment extends AbstractDb
         $this->_useIsObjectNew = true;
     }
 
+    /**
+     * CustomSalesShipment constructor.
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param string|null $connectionName
+     * @param CustomSalesShipmentFactory $customSalesShipmentFactory
+     */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         $connectionName = null,

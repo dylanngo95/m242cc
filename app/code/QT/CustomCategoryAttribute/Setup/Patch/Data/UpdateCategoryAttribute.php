@@ -12,13 +12,18 @@ use Magento\Framework\Setup\Patch\PatchVersionInterface;
 
 /**
  * Class UpdateCategoryAttribute
- * @package QT\CustomCategoryAttribute\Setup\Patch\Data
  */
 class UpdateCategoryAttribute implements DataPatchInterface, PatchVersionInterface
 {
-    private ModuleDataSetupInterface $moduleDataSetup;
+    /**
+     * @var ModuleDataSetupInterface
+     */
+    private $moduleDataSetup;
 
-    private EavSetupFactory $eavSetupFactory;
+    /**
+     * @var EavSetupFactory
+     */
+    private $eavSetupFactory;
 
     /**
      * UpdateCategoryAttribute constructor.
@@ -28,12 +33,18 @@ class UpdateCategoryAttribute implements DataPatchInterface, PatchVersionInterfa
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
         EavSetupFactory $eavSetupFactory
-    )
-    {
+    ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
+    /**
+     * Apply.
+     *
+     * @return UpdateCategoryAttribute|void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Zend_Validate_Exception
+     */
     public function apply()
     {
         /** @var EavSetup $eavSetup */
@@ -56,16 +67,41 @@ class UpdateCategoryAttribute implements DataPatchInterface, PatchVersionInterfa
         );
     }
 
+    /**
+     * Get array of patches that have to be executed prior to this.
+     *
+     * Example of implementation:
+     *
+     * [
+     *      \Vendor_Name\Module_Name\Setup\Patch\Patch1::class,
+     *      \Vendor_Name\Module_Name\Setup\Patch\Patch2::class
+     * ]
+     *
+     * @return string[]
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * Get aliases (previous names) for the patch.
+     *
+     * @return string[]
+     */
     public function getAliases()
     {
         return [];
     }
 
+    /**
+     * This version associate patch with Magento setup version.
+     * For example, if Magento current setup version is 2.0.3 and patch version is 2.0.2 then
+     * this patch will be added to registry, but will not be applied, because it is already applied
+     * by old mechanism of UpgradeData.php script
+     *
+     * @return string
+     */
     public static function getVersion()
     {
         return '1.0.0';

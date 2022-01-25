@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace QT\OrderIntegration\Model;
 
-
 use Magento\Framework\Exception\CouldNotSaveException;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterface;
 use QT\OrderIntegration\Api\OrderIntegrationRepositoryInterface;
@@ -15,29 +14,28 @@ use QT\OrderIntegration\Model\ResourceModel\OrderIntegration\CollectionFactory a
 
 /**
  * Class OrderIntegrationRepository
- * @package QT\OrderIntegration\Model
  */
 class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
 {
     /**
      * @var ObjectResourceModel
      */
-    private ObjectResourceModel $objectResourceModel;
+    private $objectResourceModel;
 
     /**
      * @var OrderIntegrationFactory
      */
-    private OrderIntegrationFactory $objectModelFactory;
+    private $objectModelFactory;
 
     /**
      * @var OrderIntegrationCollectionFactory
      */
-    private OrderIntegrationCollectionFactory $orderIntegrationCollectionFactory;
+    private $orderIntegrationCollectionFactory;
 
     /**
      * @var Config
      */
-    private Config $config;
+    private $config;
 
     /**
      * OrderIntegrationRepository constructor.
@@ -51,8 +49,7 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
         ObjectModelFactory $objectModelFactory,
         OrderIntegrationCollectionFactory $orderIntegrationCollectionFactory,
         Config $config
-    )
-    {
+    ) {
         $this->objectResourceModel = $objectResourceModel;
         $this->objectModelFactory = $objectModelFactory;
         $this->orderIntegrationCollectionFactory = $orderIntegrationCollectionFactory;
@@ -60,6 +57,8 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
     }
 
     /**
+     * Save.
+     *
      * @param OrderIntegrationInterface $orderIntegration
      * @return OrderIntegrationInterface
      * @throws CouldNotSaveException

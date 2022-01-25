@@ -14,7 +14,6 @@ use QT\OrderStatusApi\Model\ResourceModel\OrderState\Collection as OrderStateCol
 
 /**
  * Class OrderStatusService
- * @package QT\OrderStatusApi\Service
  */
 class OrderStatusService implements OrderStatusServiceInterface
 {
@@ -23,28 +22,36 @@ class OrderStatusService implements OrderStatusServiceInterface
     /**
      * @var OrderFetcher
      */
-    private OrderFetcher $orderFetcher;
+    private $orderFetcher;
 
     /**
      * @var OrderRepositoryInterface
      */
-    private OrderRepositoryInterface $orderRepository;
+    private $orderRepository;
 
     /**
      * @var OrderStatusResponseInterfaceFactory
      */
-    private OrderStatusResponseInterfaceFactory $orderStatusResponseFactory;
+    private $orderStatusResponseFactory;
 
     /**
      * @var OrderStatusCollection
      */
-    private OrderStatusCollection $orderStatusCollection;
+    private $orderStatusCollection;
 
     /**
      * @var OrderStateCollection
      */
-    private OrderStateCollection $orderStateCollection;
+    private $orderStateCollection;
 
+    /**
+     * OrderStatusService constructor.
+     * @param OrderFetcher $orderFetcher
+     * @param OrderRepositoryInterface $orderRepository
+     * @param OrderStatusResponseInterfaceFactory $orderStatusResponseFactory
+     * @param OrderStatusCollection $orderStatusCollection
+     * @param OrderStateCollection $orderStateCollection
+     */
     public function __construct(
         OrderFetcher $orderFetcher,
         OrderRepositoryInterface $orderRepository,
@@ -60,6 +67,8 @@ class OrderStatusService implements OrderStatusServiceInterface
     }
 
     /**
+     * Update.
+     *
      * @param \QT\OrderStatusApi\Api\Data\OrderStatusRequestInterface[] $orderStatus
      * @return \QT\OrderStatusApi\Api\Data\OrderStatusResponseInterface
      */
@@ -102,6 +111,8 @@ class OrderStatusService implements OrderStatusServiceInterface
     }
 
     /**
+     * GetList.
+     *
      * @return \QT\OrderStatusApi\Api\Data\OrderStatusInterface[]|null
      */
     public function getList(): array
@@ -112,6 +123,8 @@ class OrderStatusService implements OrderStatusServiceInterface
     }
 
     /**
+     * GetStateList.
+     *
      * @return \QT\OrderStatusApi\Api\Data\OrderStateInterface[]|null
      */
     public function getStateList(): array

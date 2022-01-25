@@ -2,6 +2,9 @@
 
 namespace QT\OrderStatusApi\Api\Data;
 
+/**
+ * Interface OrderStatusInterface
+ */
 interface OrderStatusInterface
 {
     /**

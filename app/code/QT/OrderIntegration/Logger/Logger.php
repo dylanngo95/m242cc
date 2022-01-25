@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace QT\OrderIntegration\Logger;
 
-
 use Psr\Log\LoggerInterface;
 use QT\OrderIntegration\Helper\Config;
 
 /**
  * Class Logger
- * @package QT\OrderIntegration\Logger
  */
 class Logger
 {
@@ -40,7 +38,7 @@ class Logger
     /**
      * Log Info.
      *
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function logInfo($message, array $context = [])
@@ -53,7 +51,7 @@ class Logger
     /**
      * Log Critical.
      *
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function logCritical($message, array $context = [])
@@ -64,7 +62,7 @@ class Logger
     /**
      * Log Debug.
      *
-     * @param $message
+     * @param string $message
      * @param array $context
      */
     public function logDebug($message, array $context = [])

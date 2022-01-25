@@ -16,39 +16,38 @@ use QT\CustomSalesOrder\Model\CustomSalesShipmentRepository;
 
 /**
  * Class OrderRepositoryInterface
- * @package QT\CustomSalesOrder\Plugin\Magento\Sales\Api
  */
 class OrderRepositoryInterface
 {
     /**
      * @var OrderExtensionFactory
      */
-    private OrderExtensionFactory $orderExtensionFactory;
+    private $orderExtensionFactory;
 
     /**
      * @var CustomSalesOrderRepository
      */
-    private CustomSalesOrderRepository $customSalesOrderRepository;
+    private $customSalesOrderRepository;
 
     /**
      * @var ObjectModelFactory
      */
-    private ObjectModelFactory $objectModelFactory;
+    private $objectModelFactory;
 
     /**
      * @var CustomSalesShipmentRepository
      */
-    private CustomSalesShipmentRepository $customSalesShipmentRepository;
+    private $customSalesShipmentRepository;
 
     /**
      * @var ProductRepositoryFactory
      */
-    private ProductRepositoryFactory $productRepositoryFactory;
+    private $productRepositoryFactory;
 
     /**
      * @var CategoryRepositoryFactory
      */
-    private CategoryRepositoryFactory $categoryRepositoryFactory;
+    private $categoryRepositoryFactory;
 
     /**
      * OrderRepositoryInterface constructor.
@@ -57,6 +56,7 @@ class OrderRepositoryInterface
      * @param CustomSalesOrderRepository $customSalesOrderRepository
      * @param CustomSalesShipmentRepository $customSalesShipmentRepository
      * @param ProductRepositoryFactory $productRepositoryFactory
+     * @param CategoryRepositoryFactory $categoryRepositoryFactory
      */
     public function __construct(
         OrderExtensionFactory $orderExtensionFactory,
@@ -75,9 +75,12 @@ class OrderRepositoryInterface
     }
 
     /**
+     * AfterGet.
+     *
      * @param \Magento\Sales\Api\OrderRepositoryInterface $subject
      * @param OrderInterface $order
      * @return OrderInterface
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterGet(
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
@@ -142,6 +145,8 @@ class OrderRepositoryInterface
     }
 
     /**
+     * AfterGetList.
+     *
      * @param \Magento\Sales\Api\OrderRepositoryInterface $subject
      * @param Collection $result
      * @return Collection
@@ -157,11 +162,14 @@ class OrderRepositoryInterface
     }
 
     /**
+     * AfterSave.
+     *
      * @param \Magento\Sales\Api\OrderRepositoryInterface $subject
      * @param OrderInterface $order
      * @return OrderInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException|\Magento\Framework\Webapi\Exception
      * @throws NoSuchEntityException
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterSave(
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
@@ -242,6 +250,8 @@ class OrderRepositoryInterface
     }
 
     /**
+     * GetProductCategory.
+     *
      * @param OrderInterface $order
      * @return string
      * @throws NoSuchEntityException

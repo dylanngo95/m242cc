@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace QT\OrderIntegration\Request;
 
-
 use QT\OrderIntegration\Helper\Config;
 use Magento\Framework\Webapi\Rest\Request;
 
 /**
  * Class SynchronousOrderRequest
- * @package QT\OrderIntegration\Request
  */
 class SynchronousOrderRequest
 {
     const REQUEST_URI = 'orders/notify';
 
-    private ClientRequest $clientRequest;
+    private $clientRequest;
 
-    private Config $config;
+    private $config;
 
     /**
      * Synchronous Order Request constructor.
@@ -29,8 +27,7 @@ class SynchronousOrderRequest
     public function __construct(
         ClientRequest $clientRequest,
         Config $config
-    )
-    {
+    ) {
         $this->clientRequest = $clientRequest;
         $this->config = $config;
     }
@@ -38,7 +35,7 @@ class SynchronousOrderRequest
     /**
      * Synchronous Order By Id.
      *
-     * @param $orderId
+     * @param int $orderId
      * @return \GuzzleHttp\Psr7\Response|\Psr\Http\Message\ResponseInterface
      */
     public function synchronousOrderById($orderId)
@@ -52,7 +49,7 @@ class SynchronousOrderRequest
             'headers' => $headers
         ];
 
-       return $this->clientRequest->doRequest(
+        return $this->clientRequest->doRequest(
             $baseUri,
             self::REQUEST_URI . "/" . $orderId,
             $params,

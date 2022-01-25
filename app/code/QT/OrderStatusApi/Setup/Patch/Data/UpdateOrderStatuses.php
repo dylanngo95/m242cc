@@ -11,19 +11,18 @@ use Magento\Sales\Setup\SalesSetupFactory;
 
 /**
  * Class InstallOrderStatusesAndInitialSalesConfig
- * @package Magento\Sales\Setup\Patch
  */
 class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
 {
     /**
      * @var ModuleDataSetupInterface
      */
-    private ModuleDataSetupInterface $moduleDataSetup;
+    private $moduleDataSetup;
 
     /**
      * @var SalesSetupFactory
      */
-    private SalesSetupFactory $salesSetupFactory;
+    private $salesSetupFactory;
 
     /**
      * InstallOrderStatusesAndInitialSalesConfig constructor.
@@ -39,7 +38,7 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
@@ -83,7 +82,7 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies()
     {
@@ -91,7 +90,7 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getVersion()
     {
@@ -99,7 +98,7 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases()
     {

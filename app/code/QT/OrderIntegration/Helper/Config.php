@@ -7,10 +7,8 @@ namespace QT\OrderIntegration\Helper;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
 
-
 /**
  * Class Config
- * @package QT\OrderIntegration\Helper
  */
 class Config extends AbstractHelper
 {
@@ -29,8 +27,8 @@ class Config extends AbstractHelper
     /**
      * Get Config Value.
      *
-     * @param $path
-     * @param $storeId
+     * @param string $path
+     * @param int $storeId
      * @return mixed
      */
     public function getConfigValue($path, $storeId = null)
@@ -51,7 +49,7 @@ class Config extends AbstractHelper
     /**
      * Is Enable.
      *
-     * @param null $storeId
+     * @param int|null $storeId
      * @return mixed
      */
     public function isEnable($storeId = null)
@@ -65,7 +63,7 @@ class Config extends AbstractHelper
     /**
      * Is Log Payload.
      *
-     * @param $storeId
+     * @param int $storeId
      * @return mixed
      */
     public function isLogPayload($storeId = null)
@@ -79,7 +77,7 @@ class Config extends AbstractHelper
     /**
      * Get Batch Size.
      *
-     * @param null $storeId
+     * @param int|null $storeId
      * @return mixed
      */
     public function getBatchSize($storeId = null)
@@ -91,7 +89,9 @@ class Config extends AbstractHelper
     }
 
     /**
-     * @param null $storeId
+     * GetMaxTry.
+     *
+     * @param int|null $storeId
      * @return mixed
      */
     public function getMaxTry($storeId = null)
@@ -102,11 +102,10 @@ class Config extends AbstractHelper
         );
     }
 
-
     /**
      * Get Endpoint Url.
      *
-     * @param null $storeId
+     * @param int|null $storeId
      * @return mixed
      */
     public function getEndpointUrl($storeId = null)
@@ -120,7 +119,7 @@ class Config extends AbstractHelper
     /**
      * Get Token.
      *
-     * @param null $storeId
+     * @param int|null $storeId
      * @return mixed
      */
     public function getToken($storeId = null)

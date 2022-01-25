@@ -14,35 +14,39 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class SynchronousOrderToCMS
- * @package QT\OrderIntegration\Console\Command
  */
 class SynchronousOrderToCMS extends AbstractCommand
 {
-
     const RESPONSE_SUCCESS = 200;
 
     /**
      * @var OrderIntegrationRepository
      */
-    private OrderIntegrationRepository $orderIntegrationRepository;
+    private $orderIntegrationRepository;
 
     /**
      * @var SynchronousOrderRequest
      */
-    private SynchronousOrderRequest $synchronousOrderRequest;
+    private $synchronousOrderRequest;
 
     /**
      * @var Config
      */
-    private Config $config;
+    private $config;
 
+    /**
+     * SynchronousOrderToCMS constructor.
+     * @param State $state
+     * @param OrderIntegrationRepository $orderIntegrationRepository
+     * @param SynchronousOrderRequest $synchronousOrderRequest
+     * @param Config $config
+     */
     public function __construct(
         State $state,
         OrderIntegrationRepository $orderIntegrationRepository,
         SynchronousOrderRequest $synchronousOrderRequest,
         Config $config
-    )
-    {
+    ) {
         parent::__construct($state);
         $this->orderIntegrationRepository = $orderIntegrationRepository;
         $this->synchronousOrderRequest = $synchronousOrderRequest;
@@ -68,6 +72,7 @@ class SynchronousOrderToCMS extends AbstractCommand
      * @return void
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {

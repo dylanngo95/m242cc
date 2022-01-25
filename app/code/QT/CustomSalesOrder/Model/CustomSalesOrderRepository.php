@@ -10,7 +10,6 @@ use QT\CustomSalesOrder\Model\CustomSalesOrderFactory as ObjectModelFactory;
 
 /**
  * Class CustomSalesOrderRepository
- * @package QT\CustomSalesOrder\Model
  */
 class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
 {
@@ -24,6 +23,11 @@ class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
      */
     private $objectModelFactory;
 
+    /**
+     * CustomSalesOrderRepository constructor.
+     * @param ObjectResourceModel $objectResourceModel
+     * @param CustomSalesOrderFactory $objectModelFactory
+     */
     public function __construct(
         ObjectResourceModel $objectResourceModel,
         ObjectModelFactory $objectModelFactory
@@ -33,9 +37,10 @@ class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
     }
 
     /**
+     * Save.
+     *
      * @param CustomSalesOrderInterface $customSalesOrder
      * @return CustomSalesOrderInterface
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
      * @throws Exception
      */
     public function save(CustomSalesOrderInterface $customSalesOrder)
@@ -49,7 +54,9 @@ class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
     }
 
     /**
-     * @param $id
+     * GetById.
+     *
+     * @param int $id
      * @return CustomSalesOrderInterface|null
      */
     public function getById($id)
@@ -63,6 +70,8 @@ class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
     }
 
     /**
+     * GetByOrderId.
+     *
      * @param int $orderId
      * @return CustomSalesOrderInterface|null
      */

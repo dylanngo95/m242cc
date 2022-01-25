@@ -6,11 +6,12 @@ namespace QT\CustomSalesOrder\Api;
 
 /**
  * Interface CustomSalesShipmentRepositoryInterface
- * @package QT\CustomSalesOrder\Api
  */
 interface CustomSalesShipmentRepositoryInterface
 {
     /**
+     * Save.
+     *
      * @param \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface $customSalesShipment
      * @return \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface
      */
@@ -19,12 +20,16 @@ interface CustomSalesShipmentRepositoryInterface
     ): \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface;
 
     /**
+     * GetById.
+     *
      * @param int $id
      * @return CustomSalesShipmentInterface|null
      */
     public function getById(int $id): ?\QT\CustomSalesOrder\Api\CustomSalesShipmentInterface;
 
     /**
+     * GetByOrderId.
+     *
      * @param int $id
      * @return CustomSalesShipmentInterface|null
      */

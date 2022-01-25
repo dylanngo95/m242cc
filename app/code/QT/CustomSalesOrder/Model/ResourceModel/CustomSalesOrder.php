@@ -7,7 +7,6 @@ use QT\CustomSalesOrder\Model\CustomSalesOrderFactory;
 
 /**
  * Class CustomSalesOrder
- * @package QT\CustomSalesOrder\Model\ResourceModel
  */
 class CustomSalesOrder extends AbstractDb
 {
@@ -29,6 +28,13 @@ class CustomSalesOrder extends AbstractDb
         $this->_init('custom_sales_order', 'entity_id');
     }
 
+    /**
+     * Constructor
+     *
+     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param string|null $connectionName
+     * @param CustomSalesOrderFactory $customSalesOrderFactory
+     */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         $connectionName = null,
@@ -41,7 +47,7 @@ class CustomSalesOrder extends AbstractDb
     /**
      * Get By Order Id.
      *
-     * @param $orderId
+     * @param int $orderId
      * @return \QT\CustomSalesOrder\Api\CustomSalesOrderInterface
      */
     public function getByOrderId($orderId)

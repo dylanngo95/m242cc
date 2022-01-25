@@ -11,7 +11,6 @@ use Symfony\Component\Console\Command\Command;
 
 /**
  * Class AbstractCommand
- * @package QT\OrderIntegration\Console\Command
  */
 abstract class AbstractCommand extends Command
 {
@@ -32,6 +31,8 @@ abstract class AbstractCommand extends Command
     }
 
     /**
+     * SetAreaIfNotDefined.
+     *
      * @throws LocalizedException
      */
     protected function setAreaIfNotDefined()

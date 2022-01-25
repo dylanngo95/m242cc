@@ -4,39 +4,51 @@ declare(strict_types=1);
 
 namespace QT\OrderIntegration\Observer;
 
-
 use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Sales\Model\Order;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterface;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterfaceFactory;
 use QT\OrderIntegration\Model\OrderIntegrationRepository;
 
 /**
  * Class OrderIntegrationObserver
- * @package QT\OrderIntegration\Observer
  */
-class OrderIntegrationObserver implements \Magento\Framework\Event\ObserverInterface
+class OrderIntegrationObserver implements ObserverInterface
 {
-    private OrderIntegrationRepository $orderIntegrationRepository;
+    /**
+     * @var OrderIntegrationRepository
+     */
+    private $orderIntegrationRepository;
 
-    private OrderIntegrationInterfaceFactory $orderIntegrationFactory;
+    /**
+     * @var OrderIntegrationInterfaceFactory
+     */
+    private $orderIntegrationFactory;
 
+    /**
+     * OrderIntegrationObserver constructor.
+     * @param OrderIntegrationRepository $orderIntegrationRepository
+     * @param OrderIntegrationInterfaceFactory $orderIntegrationFactory
+     */
     public function __construct(
         OrderIntegrationRepository $orderIntegrationRepository,
         OrderIntegrationInterfaceFactory $orderIntegrationFactory
-    )
-    {
+    ) {
         $this->orderIntegrationRepository = $orderIntegrationRepository;
         $this->orderIntegrationFactory = $orderIntegrationFactory;
     }
 
     /**
+     * Execute.
+     *
      * @param Observer $observer
      * @return void
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function execute(Observer $observer)
     {
-        /* @var $order \Magento\Sales\Model\Order */
+        /* @var Order $order */
         $order = $observer->getEvent()->getOrder();
 
         /** @var OrderIntegrationInterface $orderIntegration */

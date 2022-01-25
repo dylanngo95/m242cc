@@ -10,7 +10,7 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
  * Class OrderIntegration
  * @package QT\OrderIntegration\Model\ResourceModel
  */
-class  OrderIntegration extends AbstractDb
+class OrderIntegration extends AbstractDb
 {
     /**
      * @var string

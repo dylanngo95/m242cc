@@ -10,7 +10,6 @@ use QT\CustomSalesOrder\Model\ResourceModel\CustomSalesOrder as ResourceModel;
 
 /**
  * Class CustomSalesOrder
- * @package QT\CustomSalesOrder\Model
  */
 class CustomSalesOrder extends AbstractModel implements CustomSalesOrderInterface
 {

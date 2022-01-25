@@ -12,7 +12,6 @@ use QT\CustomSalesOrder\Model\ResourceModel\CustomSalesShipment as ObjectResourc
 
 /**
  * Class CustomSalesShipmentRepository
- * @package QT\CustomSalesOrder\Model
  */
 class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInterface
 {
@@ -26,6 +25,11 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
      */
     private $objectModelFactory;
 
+    /**
+     * CustomSalesShipmentRepository constructor.
+     * @param ObjectResourceModel $objectResourceModel
+     * @param CustomSalesShipmentFactory $objectModelFactory
+     */
     public function __construct(
         ObjectResourceModel $objectResourceModel,
         ObjectModelFactory $objectModelFactory
@@ -35,6 +39,8 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
     }
 
     /**
+     * Save.
+     *
      * @param CustomSalesShipmentInterface $customSalesShipment
      * @return CustomSalesShipmentInterface
      * @throws Exception
@@ -51,6 +57,8 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
     }
 
     /**
+     * GetById.
+     *
      * @param int $id
      * @return CustomSalesShipmentInterface|null
      */
@@ -65,7 +73,9 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
     }
 
     /**
-     * @param $orderId
+     * GetByOrderId.
+     *
+     * @param int $orderId
      * @return CustomSalesShipmentInterface|null
      */
     public function getByOrderId(int $orderId): ?CustomSalesShipmentInterface
@@ -76,5 +86,4 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
         }
         return $customSalesShipment;
     }
-
 }

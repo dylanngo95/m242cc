@@ -14,22 +14,26 @@ use QT\OrderIntegration\Logger\Logger;
 
 /**
  * Class ClientRequest
- * @package QT\OrderIntegration\Request
  */
 class ClientRequest
 {
-    private ClientFactory $clientFactory;
+    private $clientFactory;
 
-    private ResponseFactory $responseFactory;
+    private $responseFactory;
 
-    private Logger $logger;
+    private $logger;
 
+    /**
+     * ClientRequest constructor.
+     * @param ClientFactory $clientFactory
+     * @param ResponseFactory $responseFactory
+     * @param Logger $logger
+     */
     public function __construct(
         ClientFactory $clientFactory,
         ResponseFactory $responseFactory,
         Logger $logger
-    )
-    {
+    ) {
         $this->clientFactory = $clientFactory;
         $this->responseFactory = $responseFactory;
         $this->logger = $logger;
@@ -49,8 +53,7 @@ class ClientRequest
         string $uriEndpoint,
         array $params = [],
         string $requestMethod = Request::HTTP_METHOD_GET
-    )
-    {
+    ) {
         /** @var Client $client */
         $client = $this->clientFactory->create(['config' => [
             'base_uri' => $baseUri
