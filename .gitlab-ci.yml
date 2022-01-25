@@ -9,12 +9,13 @@ before_script:
   - composer install
 
 stages:
-  - compile-code
+  - build
   - check-quality
 
-executing-compile-code:
-  stage: compile-code
+executing-build:
+  stage: build
   script:
+    - php bin/magento module:enable --all
     - php bin/magento setup:di:compile
 
 executing-check-quality:
@@ -22,8 +23,3 @@ executing-check-quality:
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
     - vendor/bin/phpmd app/code/ text .phpmd.xml
-  artifacts:
-    when: always
-    paths:
-      - ./reports
-    expire_in: 1 week
