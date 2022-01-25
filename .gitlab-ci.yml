@@ -1,4 +1,4 @@
-image: dylanops/php
+image: dylanops/php:7.4
 
 cache:
   paths:
