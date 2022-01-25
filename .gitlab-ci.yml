@@ -9,10 +9,16 @@ before_script:
   - composer install
 
 stages:
-  - test
+  - complie-code
+  - check-quality
 
-executing-test:
-  stage: test
+executing-complie-code:
+  stage: complie-code
+  script:
+    - php bin/magento setup:di:complile
+
+executing-check-quality:
+  stage: check-quality
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
     - vendor/bin/phpmd app/code/ text .phpmd.xml
