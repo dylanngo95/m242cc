@@ -1,6 +1,11 @@
 image: dylanops/php:7.4
 
+variables:
+  COMPOSER_USER: cbb842dfe5c6b13a5e82ee3736e43f22
+  COMPOSER_PASSWD: a3cd6560594ddfb6302579621b75ff88
+
 before_script:
+  - php composer config [--global] http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
   - composer install
 
 stages:
