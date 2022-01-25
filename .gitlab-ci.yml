@@ -1,0 +1,22 @@
+image: dylanops/php
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - apt-get update
+  - composer install
+
+stages:
+  - test
+
+executing-test:
+  stage: test
+  script:
+    - ./vendor/bin/php-cs-fixer --config=.php_cs.dist fix app/code
+  artifacts:
+    when: always
+    paths:
+      - ./reports
+    expire_in: 1 week
