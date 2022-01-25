@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/orders/status" method="PUT">
+        <service class="QT\OrderStatusApi\Api\OrderStatusServiceInterface" method="update"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route url="/V1/orders/status" method="GET">
+        <service class="QT\OrderStatusApi\Api\OrderStatusServiceInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route url="/V1/orders/state" method="GET">
+        <service class="QT\OrderStatusApi\Api\OrderStatusServiceInterface" method="getStateList"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+</routes>

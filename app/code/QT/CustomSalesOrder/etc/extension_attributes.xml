@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
+        <attribute code="custom_sales_order_id" type="int" />
+        <attribute code="custom_sales_shipment_id" type="int" />
+        <attribute code="integration_id" type="int">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>integration_id</field>
+            </join>
+        </attribute>
+        <attribute code="sales_channel" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>sales_channel</field>
+            </join>
+        </attribute>
+        <attribute code="supplier" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>supplier</field>
+            </join>
+        </attribute>
+        <attribute code="delivery_note_id" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>delivery_note_id</field>
+            </join>
+        </attribute>
+        <attribute code="specification" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>specification</field>
+            </join>
+        </attribute>
+        <attribute code="creator" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>creator</field>
+            </join>
+        </attribute>
+        <attribute code="cs_person" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>cs_person</field>
+            </join>
+        </attribute>
+        <attribute code="issuer" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>issuer</field>
+            </join>
+        </attribute>
+        <attribute code="sale_person" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>sale_person</field>
+            </join>
+        </attribute>
+        <attribute code="products" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>products</field>
+            </join>
+        </attribute>
+        <attribute code="cancel_reason" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>cancel_reason</field>
+            </join>
+        </attribute>
+        <attribute code="use_d" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>use_d</field>
+            </join>
+        </attribute>
+        <attribute code="reconcile_status" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>reconcile_status</field>
+            </join>
+        </attribute>
+        <attribute code="transfer_status" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>transfer_status</field>
+            </join>
+        </attribute>
+        <attribute code="total_advance" type="float">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>total_advance</field>
+            </join>
+        </attribute>
+        <attribute code="transfer_date" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>transfer_date</field>
+            </join>
+        </attribute>
+        <attribute code="shipping_discount" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>shipping_discount</field>
+            </join>
+        </attribute>
+        <attribute code="category" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>category</field>
+            </join>
+        </attribute>
+        <attribute code="delivery_type" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>delivery_type</field>
+            </join>
+        </attribute>
+        <attribute code="price_type" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>price_type</field>
+            </join>
+        </attribute>
+        <attribute code="order_type" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>order_type</field>
+            </join>
+        </attribute>
+        <attribute code="product_category" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>product_category</field>
+            </join>
+        </attribute>
+        <attribute code="payment_method" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>payment_method</field>
+            </join>
+        </attribute>
+        <attribute code="source" type="string">
+            <join reference_table="custom_sales_order" reference_field="order_id" join_on_field="entity_id">
+                <field>source</field>
+            </join>
+        </attribute>
+        <attribute code="check_method" type="string" />
+        <attribute code="cod_amount" type="string" />
+        <attribute code="deposit" type="string" />
+        <attribute code="cash_account" type="string" />
+        <attribute code="bank_transfer_number" type="string" />
+        <attribute code="payment_appointment_date" type="string" />
+        <attribute code="cs_comment" type="string" />
+        <attribute code="carrier_code" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>carrier_code</field>
+            </join>
+        </attribute>
+        <attribute code="delivery_status" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>delivery_status</field>
+            </join>
+        </attribute>
+        <attribute code="city" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>city</field>
+            </join>
+        </attribute>
+        <attribute code="district" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>district</field>
+            </join>
+        </attribute>
+        <attribute code="street" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>street</field>
+            </join>
+        </attribute>
+        <attribute code="contract_id" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>contract_id</field>
+            </join>
+        </attribute>
+        <attribute code="created_at" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>created_at</field>
+            </join>
+        </attribute>
+        <attribute code="confirmed_at" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>confirmed_at</field>
+            </join>
+        </attribute>
+        <attribute code="packed_at" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>packed_at</field>
+            </join>
+        </attribute>
+        <attribute code="send_hvc_at" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>send_hvc_at</field>
+            </join>
+        </attribute>
+        <attribute code="delivery_at" type="string">
+            <join reference_table="custom_sales_shipment" reference_field="order_id" join_on_field="entity_id">
+                <field>delivery_at</field>
+            </join>
+        </attribute>
+    </extension_attributes>
+</config>

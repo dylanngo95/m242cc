@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--@api    -->
+    <preference for="QT\OrderStatusApi\Api\Data\OrderStatusRequestInterface"
+                type="QT\OrderStatusApi\Model\Data\OrderStatusRequest"/>
+    <preference for="QT\OrderStatusApi\Api\OrderStatusServiceInterface"
+                type="QT\OrderStatusApi\Service\OrderStatusService"/>
+    <preference for="QT\OrderStatusApi\Api\Data\OrderStatusResponseInterface"
+                type="QT\OrderStatusApi\Model\Data\OrderStatusResponse"/>
+    <preference for="QT\OrderStatusApi\Api\Data\OrderStatusInterface"
+                type="QT\OrderStatusApi\Model\OrderStatus"/>
+    <preference for="QT\OrderStatusApi\Api\Data\OrderStateInterface"
+                type="QT\OrderStatusApi\Model\OrderState"/>
+</config>

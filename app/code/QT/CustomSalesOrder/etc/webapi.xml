@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/custom-sales-order/:id" method="GET">
+        <service class="QT\CustomSalesOrder\Api\CustomSalesOrderRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="QT_CustomSalesOrder::get"/>
+        </resources>
+    </route>
+    <route url="/V1/custom-sales-order" method="PUT">
+        <service class="QT\CustomSalesOrder\Api\CustomSalesOrderRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="QT_CustomSalesOrder::update"/>
+        </resources>
+    </route>
+    <route url="/V1/custom-sales-shipment/:id" method="GET">
+        <service class="QT\CustomSalesOrder\Api\CustomSalesShipmentRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="QT_CustomSalesOrder::get"/>
+        </resources>
+    </route>
+    <route url="/V1/custom-sales-shipment" method="PUT">
+        <service class="QT\CustomSalesOrder\Api\CustomSalesShipmentRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="QT_CustomSalesOrder::update"/>
+        </resources>
+    </route>
+</routes>

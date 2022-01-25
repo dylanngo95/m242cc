@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--@model    -->
+    <preference for="QT\CustomSalesOrder\Api\CustomSalesShipmentInterface"
+                type="QT\CustomSalesOrder\Model\CustomSalesShipment"/>
+    <preference for="QT\CustomSalesOrder\Api\CustomSalesOrderInterface"
+                type="QT\CustomSalesOrder\Model\CustomSalesOrder"/>
+    <!--@api    -->
+    <preference for="QT\CustomSalesOrder\Api\CustomSalesOrderRepositoryInterface"
+                type="QT\CustomSalesOrder\Model\CustomSalesOrderRepository"/>
+    <preference for="QT\CustomSalesOrder\Api\CustomSalesShipmentRepositoryInterface"
+                type="QT\CustomSalesOrder\Model\CustomSalesShipmentRepository"/>
+    <!--@plugin order repository    -->
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="qt_custom_sales_order_order_repository_interface"
+                type="QT\CustomSalesOrder\Plugin\Magento\Sales\Api\OrderRepositoryInterface" />
+    </type>
+
+</config>
