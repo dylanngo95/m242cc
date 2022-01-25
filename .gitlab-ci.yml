@@ -9,11 +9,11 @@ before_script:
   - composer install
 
 stages:
-  - complie-code
+  - compile-code
   - check-quality
 
-executing-complie-code:
-  stage: complie-code
+executing-compile-code:
+  stage: compile-code
   script:
     - php bin/magento setup:di:complile
 
