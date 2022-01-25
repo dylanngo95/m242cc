@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table comment="Custom Sales Order" engine="innodb" name="custom_sales_order" resource="default">
+        <column comment="Entity ID" identity="true" name="entity_id" nullable="false" unsigned="false" xsi:type="int" />
+        <column comment="Order ID" name="order_id" unsigned="true" nullable="false" xsi:type="int"/>
+        <column comment="Integration ID" name="integration_id" unsigned="true" nullable="true" xsi:type="int"/>
+        <column comment="Sales Channel" length="255" name="sales_channel" nullable="true" xsi:type="varchar" />
+        <column comment="Delivery Note ID" length="255" name="delivery_note_id" nullable="true" xsi:type="varchar" />
+        <column comment="Specification" length="255" name="specification" nullable="true" xsi:type="varchar" />
+        <column comment="Creator" length="255" name="creator" nullable="true" xsi:type="varchar" />
+        <column comment="CS Person" length="255" name="cs_person" nullable="true" xsi:type="varchar" />
+        <column comment="Issuer" length="255" name="issuer" nullable="true" xsi:type="varchar" />
+        <column comment="Sale person" length="255" name="sale_person" nullable="true" xsi:type="varchar" />
+        <column comment="Products" length="255" name="products" nullable="true" xsi:type="varchar" />
+        <column comment="CS Comment" name="cs_comment" nullable="true" xsi:type="text" />
+        <column comment="Supplier" length="255" name="supplier" nullable="true" xsi:type="varchar" />
+        <column comment="Cancel Reason" length="255" name="cancel_reason" nullable="true" xsi:type="varchar" />
+        <column comment="UseD" length="255" name="use_d" nullable="true" xsi:type="varchar" />
+        <column comment="Reconcile Status" length="255" name="reconcile_status" nullable="true" xsi:type="varchar" />
+        <column comment="Transfer Status" length="255" name="transfer_status" nullable="true" xsi:type="varchar" />
+        <column comment="Total Advance" name="total_advance" scale="4" precision="20" unsigned="false" nullable="true" xsi:type="decimal" />
+        <column comment="Transfer Date" name="transfer_date" on_update="false" nullable="true" xsi:type="timestamp" />
+        <column comment="Shipping Discount" name="shipping_discount" scale="4" precision="20" unsigned="false" nullable="true" xsi:type="decimal" />
+        <column comment="Category" length="255" name="category" nullable="true" xsi:type="varchar" />
+        <column comment="Delivery Type" length="255" name="delivery_type" nullable="true" xsi:type="varchar" />
+        <column comment="Price Type" length="255" name="price_type" nullable="true" xsi:type="varchar" />
+        <column comment="Order Type" length="255" name="order_type" nullable="true" xsi:type="varchar" />
+        <column comment="Product Category" length="255" name="product_category" nullable="true" xsi:type="varchar" />
+        <column comment="Payment Method" length="255" name="payment_method" nullable="true" xsi:type="varchar" />
+        <column comment="Source" length="255" name="source" nullable="true" xsi:type="varchar" />
+        <column comment="Check Method" length="255" name="check_method" nullable="true" xsi:type="varchar" />
+        <column comment="COD Amount" name="cod_amount" scale="4" precision="20" unsigned="false" nullable="true" xsi:type="decimal" />
+        <column comment="Deposit" name="deposit" scale="4" precision="20" unsigned="false" nullable="true" xsi:type="decimal" />
+        <column comment="Cash account" name="cash_account" scale="4" precision="20" unsigned="false" nullable="true" xsi:type="decimal" />
+        <column comment="Bank Transfer Number" length="255" name="bank_transfer_number" nullable="true" xsi:type="varchar" />
+        <column comment="Payment appointment date" name="payment_appointment_date" on_update="false" nullable="true" xsi:type="timestamp" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="QT_CUSTOM_SALES_ORDER_ENTITY_ID_ORDER_ID">
+            <column name="order_id"/>
+        </constraint>
+    </table>
+    <table comment="Custom Sales Shipment" engine="innodb" name="custom_sales_shipment" resource="default">
+        <column comment="Entity ID" identity="true" name="entity_id" nullable="false" unsigned="false" xsi:type="int" />
+        <column comment="Order ID" name="order_id" unsigned="true" nullable="false" xsi:type="int"/>
+        <column comment="Contract ID" name="contract_id" length="255" nullable="true" xsi:type="varchar"/>
+        <column comment="City" length="255" name="city" nullable="true" xsi:type="varchar" />
+        <column comment="District" length="255" name="district" nullable="true" xsi:type="varchar" />
+        <column comment="Street" length="255" name="street" nullable="true" xsi:type="varchar" />
+        <column comment="Carrier Code" length="255" name="carrier_code" nullable="true" xsi:type="varchar" />
+        <column comment="Delivery Status" length="255" name="delivery_status" nullable="true" xsi:type="varchar" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="confirmed_at" on_update="false" nullable="true" comment="Confirmed At"/>
+        <column xsi:type="timestamp" name="packed_at" on_update="false" nullable="true" comment="Packed At"/>
+        <column xsi:type="timestamp" name="send_hvc_at" on_update="false" nullable="true" comment="Send HVC At"/>
+        <column xsi:type="timestamp" name="delivery_at" on_update="false" nullable="true" comment="Delivery At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="QT_CUSTOM_SALES_ORDER_SHIPMENT_ENTITY_ID_ORDER_ID">
+            <column name="order_id"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,65 @@
+{
+    "custom_sales_order": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "integration_id": true,
+            "sales_channel": true,
+            "delivery_note_id": true,
+            "specification": true,
+            "creator": true,
+            "cs_person": true,
+            "issuer": true,
+            "sale_person": true,
+            "products": true,
+            "cs_comment": true,
+            "supplier": true,
+            "cancel_reason": true,
+            "use_d": true,
+            "reconcile_status": true,
+            "transfer_status": true,
+            "total_advance": true,
+            "transfer_date": true,
+            "shipping_discount": true,
+            "category": true,
+            "delivery_type": true,
+            "price_type": true,
+            "order_type": true,
+            "product_category": true,
+            "payment_method": true,
+            "source": true,
+            "check_method": true,
+            "cod_amount": true,
+            "deposit": true,
+            "cash_account": true,
+            "bank_transfer_number": true,
+            "payment_appointment_date": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CUSTOM_SALES_ORDER_ORDER_ID": true
+        }
+    },
+    "custom_sales_shipment": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "contract_id": true,
+            "city": true,
+            "district": true,
+            "street": true,
+            "carrier_code": true,
+            "status": true,
+            "created_at": true,
+            "confirmed_at": true,
+            "packed_at": true,
+            "send_hvc_at": true,
+            "delivery_at": true,
+            "delivery_status": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CUSTOM_SALES_SHIPMENT_ORDER_ID": true
+        }
+    }
+}
