@@ -5,7 +5,8 @@ variables:
   COMPOSER_PASSWD: a3cd6560594ddfb6302579621b75ff88
 
 before_script:
-  - composer config [--global] http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
+  - echo $COMPOSER_USER
+  - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
   - composer install
 
 stages:
