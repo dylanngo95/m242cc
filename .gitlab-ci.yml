@@ -14,7 +14,8 @@ stages:
 executing-test:
   stage: test
   script:
-    - vendor/bin/phpcs -n --standard=Magento2 app/code
+    - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
+    - vendor/bin/phpmd app/code/ text /dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
   artifacts:
     when: always
     paths:
