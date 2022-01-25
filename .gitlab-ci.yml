@@ -5,7 +5,6 @@ variables:
   COMPOSER_PASSWD: a3cd6560594ddfb6302579621b75ff88
 
 before_script:
-  - echo $COMPOSER_USER
   - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
   - composer install
 
@@ -15,7 +14,7 @@ stages:
 executing-test:
   stage: test
   script:
-    - vendor/bin/phpcs --standard=Magento2 app/code
+    - vendor/bin/phpcs -n --standard=Magento2 app/code
   artifacts:
     when: always
     paths:
