@@ -15,7 +15,7 @@ stages:
 executing-compile-code:
   stage: compile-code
   script:
-    - php bin/magento setup:di:complile
+    - php bin/magento setup:di:compile
 
 executing-check-quality:
   stage: check-quality
