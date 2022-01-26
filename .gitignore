@@ -79,3 +79,4 @@ grunt-config.json.sample
 !/composer.json
 !/composer.lock
 !/app/etc/config.php
+.php_cs.cache
