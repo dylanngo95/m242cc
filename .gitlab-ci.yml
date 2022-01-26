@@ -6,10 +6,6 @@ variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
   GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
 
-cache:
-  paths:
-    - vendor/
-
 stages:
   - build
   - check-quality
@@ -27,6 +23,7 @@ executing-build:
     key: caches
     paths:
       - generated
+      - vendor
     policy: push
   script:
     - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
@@ -44,6 +41,7 @@ executing-check-quality:
     key: caches
     paths:
       - generated
+      - vendor
     policy: pull
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
@@ -60,6 +58,7 @@ excuting-test:
     key: caches
     paths:
       - generated
+      - vendor
     policy: pull
   script:
     - php -d xdebug.mode=coverage vendor/phpunit/phpunit/phpunit -c .phpunit.xml app/code/ --coverage-html coverage
