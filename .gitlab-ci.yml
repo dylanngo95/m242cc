@@ -55,7 +55,7 @@ executing-check-quality:
       - ./coverage
     expire_in: 1 week
 
-test:
+excuting-test:
   stage: test
   only:
     - main
