@@ -19,6 +19,12 @@ executing-build:
     - main
     - uat
     - dev
+  cache:
+    key: caches
+    paths:
+      - generated
+      - vendor
+    policy: push
   script:
     - php bin/magento module:enable --all
     - php bin/magento setup:di:compile
@@ -29,11 +35,15 @@ executing-check-quality:
     - main
     - uat
     - dev
+  cache:
+    key: caches
+    paths:
+      - generated
+      - vendor
+    policy: pull
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
     - vendor/bin/phpmd app/code/ text .phpmd.xml
-    - vendor/bin/phpstan --version
-    - php -v
     - vendor/bin/phpstan analyse --level=8 --configuration=.phpstan.neon app/code
 
 deploy:
