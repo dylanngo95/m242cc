@@ -80,3 +80,5 @@ grunt-config.json.sample
 !/composer.lock
 !/app/etc/config.php
 .php_cs.cache
+.phpunit.result.cache
+/coverage

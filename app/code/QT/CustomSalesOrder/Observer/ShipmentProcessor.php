@@ -41,6 +41,7 @@ class ShipmentProcessor implements ObserverInterface
      * @param OrderExtensionFactory $orderExtensionFactory
      * @param CustomSalesShipmentFactory $customSalesShipmentFactory
      * @param CustomSalesShipmentRepository $customSalesShipmentRepository
+     * @codeCoverageIgnore
      */
     public function __construct(
         OrderExtensionFactory $orderExtensionFactory,
@@ -61,13 +62,13 @@ class ShipmentProcessor implements ObserverInterface
     public function execute(Observer $observer)
     {
         /** @var Shipment $shipment */
-        $shipment = $observer->getEvent()->getShipment();
+        $shipment = $observer->getEvent()->getData('getShipment');
         if ($shipment->getOrigData('entity_id')) {
             return;
         }
 
         $order = $shipment->getOrder();
-        if (!$order->getId()) {
+        if (!$order->getEntityId()) {
             return;
         }
         $orderId = (int) $order->getEntityId();
@@ -87,12 +88,6 @@ class ShipmentProcessor implements ObserverInterface
 
         /** @var CustomSalesShipment $customSalesShipment */
         $customSalesShipment = $this->customSalesShipmentFactory->create();
-
-        /** @var CustomSalesShipment $customSalesShipmentOld */
-        $customSalesShipmentOld = $this->customSalesShipmentRepository->getByOrderId($orderId);
-        if ($customSalesShipmentOld->getId()) {
-            $customSalesShipment->setEntity($customSalesShipmentOld->getEntity());
-        }
 
         $customSalesShipment->setOrderId($orderId);
         $customSalesShipment->setCity($shippingAddress->getCity());
