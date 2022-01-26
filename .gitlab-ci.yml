@@ -4,6 +4,10 @@ variables:
   COMPOSER_USER: cbb842dfe5c6b13a5e82ee3736e43f22
   COMPOSER_PASSWD: a3cd6560594ddfb6302579621b75ff88
 
+cache:
+  paths:
+    - vendor/
+
 before_script:
   - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
   - composer install
@@ -23,7 +27,6 @@ executing-build:
     key: caches
     paths:
       - generated
-      - vendor
     policy: push
   script:
     - php bin/magento module:enable --all
@@ -39,7 +42,6 @@ executing-check-quality:
     key: caches
     paths:
       - generated
-      - vendor
     policy: pull
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
