@@ -11,16 +11,32 @@ before_script:
 stages:
   - build
   - check-quality
+  - deploy
 
 executing-build:
   stage: build
+  only:
+    - main
+    - uat
+    - dev
   script:
     - php bin/magento module:enable --all
     - php bin/magento setup:di:compile
 
 executing-check-quality:
   stage: check-quality
+  only:
+    - main
+    - uat
+    - dev
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
     - vendor/bin/phpmd app/code/ text .phpmd.xml
     - vendor/bin/phpstan analyse --level=8 --configuration=.phpstan.neon app/code
+
+deploy:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - echo "deploy completed"
