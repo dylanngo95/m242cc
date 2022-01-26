@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace QT\CustomSalesOrder\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Context;
 use QT\CustomSalesOrder\Model\CustomSalesOrderFactory;
 
 /**
@@ -31,13 +34,13 @@ class CustomSalesOrder extends AbstractDb
     /**
      * Constructor
      *
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param Context $context
      * @param string|null $connectionName
      * @param CustomSalesOrderFactory $customSalesOrderFactory
      */
     public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        $connectionName = null,
+        Context $context,
+        string $connectionName = null,
         CustomSalesOrderFactory $customSalesOrderFactory
     ) {
         parent::__construct($context, $connectionName);
@@ -54,6 +57,7 @@ class CustomSalesOrder extends AbstractDb
     {
         $customSalesOrder = $this->customSalesOrderFactory->create();
 
+        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $connection */
         $connection = $this->getConnection();
         $select = $connection
             ->select()

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace QT\OrderStatusApi\Service;
 
+use Exception;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\Order;
+use QT\OrderStatusApi\Api\Data\OrderStatusResponseInterface;
 use QT\OrderStatusApi\Api\Data\OrderStatusResponseInterfaceFactory;
 use QT\OrderStatusApi\Api\OrderStatusServiceInterface;
 use QT\OrderStatusApi\Model\Data\OrderStatusResponse;
@@ -70,16 +73,17 @@ class OrderStatusService implements OrderStatusServiceInterface
      * Update.
      *
      * @param \QT\OrderStatusApi\Api\Data\OrderStatusRequestInterface[] $orderStatus
-     * @return \QT\OrderStatusApi\Api\Data\OrderStatusResponseInterface
+     * @return OrderStatusResponseInterface
      */
-    public function update(array $orderStatus): \QT\OrderStatusApi\Api\Data\OrderStatusResponseInterface
+    public function update(array $orderStatus): OrderStatusResponseInterface
     {
         $orderUpdateSuccess = [];
         $orderUpdateError = [];
 
         foreach ($orderStatus as $item) {
-            $orderId = $item->getOrderId();
+            $orderId = (int) $item->getOrderId();
             try {
+                /** @var Order|null $order */
                 $order = $this->orderFetcher->fetchById($orderId);
                 if (!$order) {
                     $orderUpdateError[] = $orderId;
@@ -91,13 +95,16 @@ class OrderStatusService implements OrderStatusServiceInterface
                 if ($item->getState()) {
                     $order->setState($item->getState());
                 }
+
                 $order->addStatusToHistory(
-                    $order->getStatus(),
-                    'Status update from integration'
+                    (string) $order->getStatus(),
+                    'Status update from integration',
+                    false
                 );
+
                 $this->orderRepository->save($order);
                 $orderUpdateSuccess[] = $orderId;
-            } catch (\Exception $e) {
+            } catch (Exception $exception) {
                 $orderUpdateError[] = $orderId;
             }
         }
@@ -113,7 +120,7 @@ class OrderStatusService implements OrderStatusServiceInterface
     /**
      * GetList.
      *
-     * @return \QT\OrderStatusApi\Api\Data\OrderStatusInterface[]|null
+     * @return array
      */
     public function getList(): array
     {
@@ -125,7 +132,7 @@ class OrderStatusService implements OrderStatusServiceInterface
     /**
      * GetStateList.
      *
-     * @return \QT\OrderStatusApi\Api\Data\OrderStateInterface[]|null
+     * @return array
      */
     public function getStateList(): array
     {

@@ -14,8 +14,14 @@ class SynchronousOrderRequest
 {
     const REQUEST_URI = 'orders/notify';
 
+    /**
+     * @var ClientRequest
+     */
     private $clientRequest;
 
+    /**
+     * @var Config
+     */
     private $config;
 
     /**
@@ -35,11 +41,15 @@ class SynchronousOrderRequest
     /**
      * Synchronous Order By Id.
      *
-     * @param int $orderId
-     * @return \GuzzleHttp\Psr7\Response|\Psr\Http\Message\ResponseInterface
+     * @param int|null $orderId
+     * @return \GuzzleHttp\Psr7\Response|\Psr\Http\Message\ResponseInterface|null
      */
-    public function synchronousOrderById($orderId)
+    public function synchronousOrderById(?int $orderId)
     {
+        if (!$orderId) {
+            return null;
+        }
+
         $baseUri = $this->config->getEndpointUrl();
 
         $headers = [

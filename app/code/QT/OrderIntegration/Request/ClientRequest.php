@@ -17,10 +17,19 @@ use QT\OrderIntegration\Logger\Logger;
  */
 class ClientRequest
 {
+    /**
+     * @var ClientFactory
+     */
     private $clientFactory;
 
+    /**
+     * @var ResponseFactory
+     */
     private $responseFactory;
 
+    /**
+     * @var Logger
+     */
     private $logger;
 
     /**

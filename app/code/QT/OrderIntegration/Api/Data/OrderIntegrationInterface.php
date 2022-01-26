@@ -30,9 +30,9 @@ interface OrderIntegrationInterface
     /**
      * Getter for EntityId.
      *
-     * @return int|null
+     * @return int
      */
-    public function getEntityId(): ?int;
+    public function getEntityId();
 
     /**
      * Setter for EntityId.
@@ -41,7 +41,7 @@ interface OrderIntegrationInterface
      *
      * @return void
      */
-    public function setEntityId(?int $entityId): void;
+    public function setEntityId(?int $entityId);
 
     /**
      * Getter for StoreId.

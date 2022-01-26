@@ -15,7 +15,12 @@
     <!-- Code Size Rules -->
     <rule ref="rulesets/codesize.xml/CyclomaticComplexity" />
     <rule ref="rulesets/codesize.xml/NPathComplexity" />
-    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength" />
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" description="The method size reporting threshold" value="100"/>
+            <property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="false"/>
+        </properties>
+    </rule>
     <rule ref="rulesets/codesize.xml/ExcessiveParameterList" />
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
         <properties>
@@ -25,7 +30,7 @@
     <rule ref="rulesets/codesize.xml/TooManyFields" />
     <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
         <properties>
-            <property name="maximum" value="100" />
+            <property name="maximum" value="200" />
         </properties>
     </rule>
 
@@ -45,6 +50,12 @@
     <rule ref="rulesets/naming.xml/ShortMethodName" />
     <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
     <rule ref="rulesets/naming.xml/BooleanGetMethodName" />
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" description="The variable length reporting threshold" value="40"/>
+            <property name="subtract-suffixes" description="Comma-separated list of suffixes that will not count in the length of the variable name. Only the first matching suffix will be subtracted." value=""/>
+        </properties>
+    </rule>
 
     <!-- Magento Specific Rules -->
     <rule ref="Magento/CodeMessDetector/resources/rulesets/design.xml/AllPurposeAction" />

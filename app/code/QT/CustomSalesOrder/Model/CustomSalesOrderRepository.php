@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace QT\CustomSalesOrder\Model;
 
 use Magento\Framework\Webapi\Exception;
@@ -39,11 +41,11 @@ class CustomSalesOrderRepository implements CustomSalesOrderRepositoryInterface
     /**
      * Save.
      *
-     * @param CustomSalesOrderInterface $customSalesOrder
-     * @return CustomSalesOrderInterface
+     * @param CustomSalesOrder $customSalesOrder
+     * @return CustomSalesOrder
      * @throws Exception
      */
-    public function save(CustomSalesOrderInterface $customSalesOrder)
+    public function save(CustomSalesOrder $customSalesOrder)
     {
         try {
             $this->objectResourceModel->save($customSalesOrder);

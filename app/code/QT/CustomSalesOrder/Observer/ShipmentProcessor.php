@@ -56,7 +56,6 @@ class ShipmentProcessor implements ObserverInterface
      * Execute.
      *
      * @param Observer $observer
-     * @return mixed|void
      * @throws \Magento\Framework\Webapi\Exception
      */
     public function execute(Observer $observer)
@@ -68,14 +67,14 @@ class ShipmentProcessor implements ObserverInterface
         }
 
         $order = $shipment->getOrder();
-        if (!$order) {
+        if (!$order->getId()) {
             return;
         }
         $orderId = (int) $order->getEntityId();
 
         /** @var OrderExtensionInterface $extensionAttributes */
         $extensionAttributes = $order->getExtensionAttributes() ?? $this->orderExtensionFactory->create();
-        $shippingAssignments = $extensionAttributes->getShippingAssignments();
+        $shippingAssignments = $extensionAttributes->getShippingAssignments() ?? [];
         if (!count($shippingAssignments)) {
             return;
         }
@@ -89,14 +88,15 @@ class ShipmentProcessor implements ObserverInterface
         /** @var CustomSalesShipment $customSalesShipment */
         $customSalesShipment = $this->customSalesShipmentFactory->create();
 
+        /** @var CustomSalesShipment $customSalesShipmentOld */
         $customSalesShipmentOld = $this->customSalesShipmentRepository->getByOrderId($orderId);
-        if ($customSalesShipmentOld) {
+        if ($customSalesShipmentOld->getId()) {
             $customSalesShipment->setEntity($customSalesShipmentOld->getEntity());
         }
 
         $customSalesShipment->setOrderId($orderId);
         $customSalesShipment->setCity($shippingAddress->getCity());
-        $customSalesShipment->setStreet(implode(",", $shippingAddress->getStreet()));
+        $customSalesShipment->setStreet(implode(",", $shippingAddress->getStreet() ?? []));
         $customSalesShipment->setDeliveryStatus(CustomSalesShipmentInterface::STATUS_NEW);
         $this->customSalesShipmentRepository->save($customSalesShipment);
     }

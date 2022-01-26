@@ -6,9 +6,11 @@ namespace QT\OrderIntegration\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Sales\Model\Order;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterface;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterfaceFactory;
+use QT\OrderIntegration\Model\OrderIntegration;
 use QT\OrderIntegration\Model\OrderIntegrationRepository;
 
 /**
@@ -44,14 +46,14 @@ class OrderIntegrationObserver implements ObserverInterface
      *
      * @param Observer $observer
      * @return void
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws CouldNotSaveException
      */
     public function execute(Observer $observer)
     {
         /* @var Order $order */
-        $order = $observer->getEvent()->getOrder();
+        $order = $observer->getEvent()->getData('order');
 
-        /** @var OrderIntegrationInterface $orderIntegration */
+        /** @var OrderIntegration $orderIntegration */
         $orderIntegration = $this->orderIntegrationFactory->create();
 
         $orderIntegration->setStoreId((int) $order->getStoreId());

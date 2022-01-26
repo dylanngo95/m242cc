@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace QT\CustomSalesOrder\Plugin\Magento\Sales\Api;
 
 use Magento\Catalog\Model\CategoryRepositoryFactory;
+use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ProductRepositoryFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
@@ -12,6 +13,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
 use QT\CustomSalesOrder\Model\CustomSalesOrderFactory as ObjectModelFactory;
 use QT\CustomSalesOrder\Model\CustomSalesOrderRepository;
+use QT\CustomSalesOrder\Model\CustomSalesShipment;
 use QT\CustomSalesOrder\Model\CustomSalesShipmentRepository;
 
 /**
@@ -92,52 +94,53 @@ class OrderRepositoryInterface
 
         $customSalesOrder = $this->customSalesOrderRepository->getByOrderId($orderId);
         if ($customSalesOrder) {
-            $orderExtension->setCustomSalesOrderId($customSalesOrder->getEntityId());
-            $orderExtension->setSalesChannel($customSalesOrder->getSalesChannel());
-            $orderExtension->setSupplier($customSalesOrder->getSupplier());
-            $orderExtension->setCsComment($customSalesOrder->getCsComment());
-            $orderExtension->setIntegrationId($customSalesOrder->getIntegrationId());
-            $orderExtension->setDeliveryNoteId($customSalesOrder->getDeliveryNoteId());
-            $orderExtension->setSpecification($customSalesOrder->getSpecification());
-            $orderExtension->setCreator($customSalesOrder->getCreator());
-            $orderExtension->setCsPerson($customSalesOrder->getCsPerson());
-            $orderExtension->setIssuer($customSalesOrder->getIssuer());
-            $orderExtension->setSalePerson($customSalesOrder->getSalePerson());
-            $orderExtension->setProducts($customSalesOrder->getProducts());
-            $orderExtension->setCancelReason($customSalesOrder->getCancelReason());
-            $orderExtension->setUseD($customSalesOrder->getUseD());
-            $orderExtension->setReconcileStatus($customSalesOrder->getReconcileStatus());
-            $orderExtension->setTransferStatus($customSalesOrder->getTransferStatus());
-            $orderExtension->setTotalAdvance($customSalesOrder->getTotalAdvance());
-            $orderExtension->setTransferDate($customSalesOrder->getTransferDate());
-            $orderExtension->setShippingDiscount($customSalesOrder->getShippingDiscount());
-            $orderExtension->setCategory($customSalesOrder->getCategory());
-            $orderExtension->setDeliveryType($customSalesOrder->getDeliveryType());
-            $orderExtension->setPriceType($customSalesOrder->getPriceType());
-            $orderExtension->setOrderType($customSalesOrder->getOrderType());
-            $orderExtension->setProductCategory($customSalesOrder->getProductCategory());
-            $orderExtension->setPaymentMethod($customSalesOrder->getPaymentMethod());
-            $orderExtension->setSource($customSalesOrder->getSource());
-            $orderExtension->setCheckMethod($customSalesOrder->getCheckMethod());
-            $orderExtension->setCodAmount($customSalesOrder->getCodAmount());
-            $orderExtension->setDeposit($customSalesOrder->getDeposit());
-            $orderExtension->setCashAccount($customSalesOrder->getCashAccount());
-            $orderExtension->setBankTransferNumber($customSalesOrder->getBankTransferNumber());
-            $orderExtension->setPaymentAppointmentDate($customSalesOrder->getPaymentAppointmentDate());
+            $orderExtension->setCustomSalesOrderId((int) $customSalesOrder->getEntityId());
+            $orderExtension->setSalesChannel((string) $customSalesOrder->getSalesChannel());
+            $orderExtension->setSupplier((string) $customSalesOrder->getSupplier());
+            $orderExtension->setCsComment((string) $customSalesOrder->getCsComment());
+            $orderExtension->setIntegrationId((int) $customSalesOrder->getIntegrationId());
+            $orderExtension->setDeliveryNoteId((string) $customSalesOrder->getDeliveryNoteId());
+            $orderExtension->setSpecification((string) $customSalesOrder->getSpecification());
+            $orderExtension->setCreator((string) $customSalesOrder->getCreator());
+            $orderExtension->setCsPerson((string) $customSalesOrder->getCsPerson());
+            $orderExtension->setIssuer((string) $customSalesOrder->getIssuer());
+            $orderExtension->setSalePerson((string) $customSalesOrder->getSalePerson());
+            $orderExtension->setProducts((string) $customSalesOrder->getProducts());
+            $orderExtension->setCancelReason((string) $customSalesOrder->getCancelReason());
+            $orderExtension->setUseD((string) $customSalesOrder->getUseD());
+            $orderExtension->setReconcileStatus((string) $customSalesOrder->getReconcileStatus());
+            $orderExtension->setTransferStatus((string) $customSalesOrder->getTransferStatus());
+            $orderExtension->setTotalAdvance((float) $customSalesOrder->getTotalAdvance());
+            $orderExtension->setTransferDate((string) $customSalesOrder->getTransferDate());
+            $orderExtension->setShippingDiscount((string) $customSalesOrder->getShippingDiscount());
+            $orderExtension->setCategory((string) $customSalesOrder->getCategory());
+            $orderExtension->setDeliveryType((string) $customSalesOrder->getDeliveryType());
+            $orderExtension->setPriceType((string) $customSalesOrder->getPriceType());
+            $orderExtension->setOrderType((string) $customSalesOrder->getOrderType());
+            $orderExtension->setProductCategory((string) $customSalesOrder->getProductCategory());
+            $orderExtension->setPaymentMethod((string) $customSalesOrder->getPaymentMethod());
+            $orderExtension->setSource((string) $customSalesOrder->getSource());
+            $orderExtension->setCheckMethod((string) $customSalesOrder->getCheckMethod());
+            $orderExtension->setCodAmount((string) $customSalesOrder->getCodAmount());
+            $orderExtension->setDeposit((string) $customSalesOrder->getDeposit());
+            $orderExtension->setCashAccount((string) $customSalesOrder->getCashAccount());
+            $orderExtension->setBankTransferNumber((string) $customSalesOrder->getBankTransferNumber());
+            $orderExtension->setPaymentAppointmentDate((string) $customSalesOrder->getPaymentAppointmentDate());
         }
+
+        /** @var CustomSalesShipment $customSalesShipment */
         $customSalesShipment = $this->customSalesShipmentRepository->getByOrderId($orderId);
-        if ($customSalesShipment) {
+        if ($customSalesShipment->getEntityId()) {
             $orderExtension->setCustomSalesShipmentId($customSalesShipment->getEntityId());
-            $orderExtension->setShipmentStatus($customSalesShipment->getStatus());
-            $orderExtension->setContractId($customSalesShipment->getContractId());
-            $orderExtension->setCity($customSalesShipment->getCity());
-            $orderExtension->setDistrict($customSalesShipment->getDistrict());
-            $orderExtension->setStreet($customSalesShipment->getStreet());
-            $orderExtension->setCreatedAt($customSalesShipment->getCreatedAt());
-            $orderExtension->setConfirmedAt($customSalesShipment->getConfirmedAt());
-            $orderExtension->setPackedAt($customSalesShipment->getPackedAt());
-            $orderExtension->setSendHvcAt($customSalesShipment->getSendHvcAt());
-            $orderExtension->setDeliveryAt($customSalesShipment->getDeliveryAt());
+            $orderExtension->setContractId((string) $customSalesShipment->getContractId());
+            $orderExtension->setCity((string) $customSalesShipment->getCity());
+            $orderExtension->setDistrict((string) $customSalesShipment->getDistrict());
+            $orderExtension->setStreet((string) $customSalesShipment->getStreet());
+            $orderExtension->setCreatedAt((string) $customSalesShipment->getCreatedAt());
+            $orderExtension->setConfirmedAt((string) $customSalesShipment->getConfirmedAt());
+            $orderExtension->setPackedAt((string) $customSalesShipment->getPackedAt());
+            $orderExtension->setSendHvcAt((string) $customSalesShipment->getSendHvcAt());
+            $orderExtension->setDeliveryAt((string) $customSalesShipment->getDeliveryAt());
         }
 
         $order->setExtensionAttributes($orderExtension);
@@ -155,6 +158,7 @@ class OrderRepositoryInterface
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
         Collection $result
     ) {
+        /** @var OrderInterface $order */
         foreach ($result->getItems() as $order) {
             $this->afterGet($subject, $order);
         }
@@ -186,7 +190,7 @@ class OrderRepositoryInterface
 
             $customSalesOrderOld = $this->customSalesOrderRepository->getByOrderId($orderId);
             if ($customSalesOrderOld) {
-                $customSalesOrder->setEntityId($customSalesOrderOld->getEntityId());
+                $customSalesOrder->setEntityId((int) $customSalesOrderOld->getEntityId());
             }
 
             $customSalesOrder->setOrderId($orderId);
@@ -206,18 +210,18 @@ class OrderRepositoryInterface
             $customSalesOrder->setTransferStatus($orderExtension->getTransferStatus());
             $customSalesOrder->setTotalAdvance($orderExtension->getTotalAdvance());
             $customSalesOrder->setTransferDate($orderExtension->getTransferDate());
-            $customSalesOrder->setShippingDiscount($orderExtension->getShippingDiscount());
+            $customSalesOrder->setShippingDiscount((float) $orderExtension->getShippingDiscount());
             $customSalesOrder->setCategory($orderExtension->getCategory());
             $customSalesOrder->setDeliveryType($orderExtension->getDeliveryType());
             $customSalesOrder->setPriceType($orderExtension->getPriceType());
             $customSalesOrder->setOrderType($orderExtension->getOrderType());
             $customSalesOrder->setSource($orderExtension->getSource());
             $customSalesOrder->setCheckMethod($orderExtension->getCheckMethod());
-            $customSalesOrder->setCodAmount($orderExtension->getCodAmount());
-            $customSalesOrder->setDeposit($orderExtension->getDeposit());
-            $customSalesOrder->setCashAccount($orderExtension->getCashAccount());
-            $customSalesOrder->setBankTransferNumber($orderExtension->getBankTransferNumber());
-            $customSalesOrder->setPaymentAppointmentDate($orderExtension->getPaymentAppointmentDate());
+            $customSalesOrder->setCodAmount((float) $orderExtension->getCodAmount());
+            $customSalesOrder->setDeposit((float) $orderExtension->getDeposit());
+            $customSalesOrder->setCashAccount((float) $orderExtension->getCashAccount());
+            $customSalesOrder->setBankTransferNumber((string) $orderExtension->getBankTransferNumber());
+            $customSalesOrder->setPaymentAppointmentDate((string) $orderExtension->getPaymentAppointmentDate());
 
             if ($orderExtension->getProductCategory()) {
                 $customSalesOrder->setProductCategory($orderExtension->getProductCategory());
@@ -262,9 +266,12 @@ class OrderRepositoryInterface
         $productCategories = [];
         $items = $order->getItems();
         foreach ($items as $item) {
+
+            /** @var Product $product */
             $product = $this->productRepositoryFactory
                 ->create()
-                ->getById($item->getProductId());
+                ->getById((int) $item->getProductId());
+
             $categoryIds = $product->getCategoryIds();
             foreach ($categoryIds as $categoryId) {
                 $category = $this->categoryRepositoryFactory

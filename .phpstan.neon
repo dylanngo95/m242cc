@@ -1,0 +1,14 @@
+includes:
+    - vendor/bitexpert/phpstan-magento/extension.neon
+parameters:
+    level: 8
+    checkExplicitMixedMissingReturn: true
+    checkPhpDocMissingReturn: true
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    paths:
+        - app/code
+    bootstrapFiles:
+        - vendor/bitexpert/phpstan-magento/autoload.php
+    magento:
+        checkServiceContracts: false

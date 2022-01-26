@@ -12,12 +12,12 @@ interface CustomSalesShipmentRepositoryInterface
     /**
      * Save.
      *
-     * @param \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface $customSalesShipment
-     * @return \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface
+     * @param \QT\CustomSalesOrder\Model\CustomSalesShipment $customSalesShipment
+     * @return \QT\CustomSalesOrder\Model\CustomSalesShipment
      */
     public function save(
-        \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface $customSalesShipment
-    ): \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface;
+        \QT\CustomSalesOrder\Model\CustomSalesShipment $customSalesShipment
+    ): \QT\CustomSalesOrder\Model\CustomSalesShipment;
 
     /**
      * GetById.

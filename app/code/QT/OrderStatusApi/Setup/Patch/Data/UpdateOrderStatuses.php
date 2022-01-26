@@ -7,6 +7,7 @@ namespace QT\OrderStatusApi\Setup\Patch\Data;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchVersionInterface;
+use Magento\Sales\Setup\SalesSetup;
 use Magento\Sales\Setup\SalesSetupFactory;
 
 /**
@@ -44,7 +45,7 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
      */
     public function apply()
     {
-        /** @var \Magento\Sales\Setup\SalesSetup $salesSetup */
+        /** @var SalesSetup $salesSetup */
         $salesSetup = $this->salesSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
         /**
@@ -79,6 +80,8 @@ class UpdateOrderStatuses implements DataPatchInterface, PatchVersionInterface
             ['status', 'label'],
             $data
         );
+
+        return $this;
     }
 
     /**

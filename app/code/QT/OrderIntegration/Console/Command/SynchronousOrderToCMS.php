@@ -56,7 +56,7 @@ class SynchronousOrderToCMS extends AbstractCommand
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('qt:synchronous_order');
         $this->setDescription('N/A');
@@ -64,17 +64,16 @@ class SynchronousOrderToCMS extends AbstractCommand
     }
 
     /**
-     * CLI command description
+     * Execute.
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     *
-     * @return void
+     * @return int
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      * @throws \Magento\Framework\Exception\LocalizedException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->setAreaIfNotDefined();
 
@@ -88,29 +87,41 @@ class SynchronousOrderToCMS extends AbstractCommand
             $orderIntegrationFails = $this->orderIntegrationRepository->getOrderIntegrationFail();
             foreach ($orderIntegrationFails as $orderIntegration) {
                 $orderIntegrationItem = $this->orderIntegrationRepository->getById($orderIntegration->getEntityId());
-                if ($orderIntegrationItem->getMaxTry() >= $this->config->getMaxTry()) {
+                if ($orderIntegrationItem
+                    && $orderIntegrationItem->getMaxTry() >= $this->config->getMaxTry()) {
                     break;
                 }
                 $this->syncOrderToCMS($orderIntegrationItem);
             }
         }
         $output->writeln("Start synchronous order to cms");
+        return 0;
     }
 
     /**
      * Sync Order To CMS.
      *
-     * @param OrderIntegrationInterface $orderIntegrationItem
+     * @param OrderIntegrationInterface|null $orderIntegrationItem
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-    private function syncOrderToCMS(OrderIntegrationInterface $orderIntegrationItem)
+    private function syncOrderToCMS(?OrderIntegrationInterface $orderIntegrationItem): void
     {
+        if (!$orderIntegrationItem) {
+            return;
+        }
+
         $this->orderIntegrationRepository->updateStatusById(
             $orderIntegrationItem->getEntityId(),
             OrderIntegrationInterface::STATUS_PROCESSING
         );
-        $response = $this->synchronousOrderRequest->synchronousOrderById($orderIntegrationItem->getOrderId());
-        if ($response->getStatusCode() !== self::RESPONSE_SUCCESS) {
+
+        $response = $this->synchronousOrderRequest->synchronousOrderById(
+            $orderIntegrationItem->getOrderId()
+        );
+
+        if ($response
+            && $response->getStatusCode() !== self::RESPONSE_SUCCESS
+        ) {
             $this->orderIntegrationRepository->updateStatusById(
                 $orderIntegrationItem->getEntityId(),
                 OrderIntegrationInterface::STATUS_FAIL,

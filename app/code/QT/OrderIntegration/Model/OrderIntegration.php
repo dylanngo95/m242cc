@@ -10,7 +10,6 @@ use QT\OrderIntegration\Model\ResourceModel\OrderIntegration as ResourceModel;
 
 /**
  * Class OrderIntegration
- * @package QT\OrderIntegration\Model
  */
 class OrderIntegration extends AbstractModel implements OrderIntegrationInterface
 {
@@ -30,18 +29,18 @@ class OrderIntegration extends AbstractModel implements OrderIntegrationInterfac
     /**
      * @inheritDoc
      */
-    public function getEntityId(): ?int
+    public function getEntityId()
     {
-        return $this->getData(self::ENTITY_ID) === null ? null
-            : (int)$this->getData(self::ENTITY_ID);
+        return (int)$this->getData(self::ENTITY_ID);
     }
 
     /**
      * @inheritDoc
      */
-    public function setEntityId($entityId): void
+    public function setEntityId($entityId)
     {
         $this->setData(self::ENTITY_ID, $entityId);
+        return $this;
     }
 
     /**
@@ -116,7 +115,8 @@ class OrderIntegration extends AbstractModel implements OrderIntegrationInterfac
      */
     public function getMaxTry(): ?int
     {
-        return (int) $this->getData(self::MAX_TRY);
+        return $this->getData(self::MAX_TRY) === null ? null
+            : (int)$this->getData(self::MAX_TRY);
     }
 
     /**

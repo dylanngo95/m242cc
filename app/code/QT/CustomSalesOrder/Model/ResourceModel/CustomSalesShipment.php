@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace QT\CustomSalesOrder\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Context;
+use QT\CustomSalesOrder\Api\CustomSalesShipmentInterface;
 use QT\CustomSalesOrder\Model\CustomSalesShipmentFactory;
 
 /**
@@ -33,13 +35,13 @@ class CustomSalesShipment extends AbstractDb
 
     /**
      * CustomSalesShipment constructor.
-     * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
+     * @param Context $context
      * @param string|null $connectionName
      * @param CustomSalesShipmentFactory $customSalesShipmentFactory
      */
     public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        $connectionName = null,
+        Context $context,
+        string $connectionName = null,
         CustomSalesShipmentFactory $customSalesShipmentFactory
     ) {
         parent::__construct($context, $connectionName);
@@ -49,16 +51,18 @@ class CustomSalesShipment extends AbstractDb
      * Get By Order Id.
      *
      * @param int $orderId
-     * @return \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface
+     * @return CustomSalesShipmentInterface
      */
-    public function getByOrderId(int $orderId): \QT\CustomSalesOrder\Api\CustomSalesShipmentInterface
+    public function getByOrderId(int $orderId): CustomSalesShipmentInterface
     {
         $customSalesOrder = $this->customSalesShipmentFactory->create();
 
+        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $connection */
         $connection = $this->getConnection();
         $select = $connection
             ->select()
             ->from($connection->getTableName('custom_sales_shipment'));
+
         $select->where('order_id=?', $orderId);
         $data = $connection->fetchRow($select);
         if ($data) {

@@ -12,10 +12,12 @@ interface OrderIntegrationRepositoryInterface
     /**
      * Save.
      *
-     * @param \QT\OrderIntegration\Api\Data\OrderIntegrationInterface $orderIntegration
-     * @return \QT\OrderIntegration\Api\Data\OrderIntegrationInterface
+     * @param \QT\OrderIntegration\Model\OrderIntegration $orderIntegration
+     * @return \QT\OrderIntegration\Model\OrderIntegration
      */
-    public function save(\QT\OrderIntegration\Api\Data\OrderIntegrationInterface $orderIntegration): \QT\OrderIntegration\Api\Data\OrderIntegrationInterface;
+    public function save(
+        \QT\OrderIntegration\Model\OrderIntegration $orderIntegration
+    ):\QT\OrderIntegration\Model\OrderIntegration;
 
     /**
      * GetOrderIntegrationNew.

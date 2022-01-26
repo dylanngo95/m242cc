@@ -41,7 +41,7 @@ class Logger
      * @param string $message
      * @param array $context
      */
-    public function logInfo($message, array $context = [])
+    public function logInfo(string $message, array $context = []): void
     {
         if ($this->config->isLogPayload()) {
             $this->logger->info($message, $context);
@@ -54,7 +54,7 @@ class Logger
      * @param string $message
      * @param array $context
      */
-    public function logCritical($message, array $context = [])
+    public function logCritical(string $message, array $context = []): void
     {
         $this->logger->critical($message, $context);
     }
@@ -65,7 +65,7 @@ class Logger
      * @param string $message
      * @param array $context
      */
-    public function logDebug($message, array $context = [])
+    public function logDebug(string $message, array $context = []): void
     {
         $this->logger->debug($message, $context);
     }

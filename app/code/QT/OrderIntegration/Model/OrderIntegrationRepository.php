@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace QT\OrderIntegration\Model;
 
+use Exception;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use QT\OrderIntegration\Api\Data\OrderIntegrationInterface;
 use QT\OrderIntegration\Api\OrderIntegrationRepositoryInterface;
@@ -59,16 +61,16 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
     /**
      * Save.
      *
-     * @param OrderIntegrationInterface $orderIntegration
-     * @return OrderIntegrationInterface
+     * @param OrderIntegration $orderIntegration
+     * @return OrderIntegration
      * @throws CouldNotSaveException
      */
-    public function save(OrderIntegrationInterface $orderIntegration): OrderIntegrationInterface
+    public function save(OrderIntegration $orderIntegration): OrderIntegration
     {
         try {
             $this->objectResourceModel->save($orderIntegration);
             return $orderIntegration;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new CouldNotSaveException(__($e->getMessage()));
         }
     }
@@ -96,11 +98,11 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
      * @param int $status
      * @param string|null $comment
      * @return OrderIntegrationInterface|null
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws AlreadyExistsException
      */
     public function updateStatusById(int $id, int $status, ?string $comment = null): ?OrderIntegrationInterface
     {
-        /** @var OrderIntegrationInterface $customSalesOrder */
+        /** @var OrderIntegration $customSalesOrder */
         $customSalesOrder = $this->objectModelFactory->create();
         $this->objectResourceModel->load($customSalesOrder, $id);
         if (!$customSalesOrder->getEntityId()) {
@@ -123,7 +125,7 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
      *
      * @return array
      */
-    public function getOrderIntegrationNew(): ?array
+    public function getOrderIntegrationNew(): array
     {
         $batchSize = $this->config->getBatchSize() ?? 500;
         $result = $this->orderIntegrationCollectionFactory
@@ -131,7 +133,7 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
             ->addFieldToSelect(['entity_id'])
             ->addFieldToFilter('status', ['eq' => OrderIntegrationInterface::STATUS_NEW])
             ->setPageSize($batchSize);
-        return $result->getItems() ?? null;
+        return $result->getItems();
     }
 
     /**
@@ -139,7 +141,7 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
      *
      * @return array
      */
-    public function getOrderIntegrationFail(): ?array
+    public function getOrderIntegrationFail(): array
     {
         $batchSize = $this->config->getBatchSize() ?? 500;
         $result = $this->orderIntegrationCollectionFactory
@@ -147,6 +149,6 @@ class OrderIntegrationRepository implements OrderIntegrationRepositoryInterface
             ->addFieldToSelect(['entity_id'])
             ->addFieldToFilter('status', ['eq' => OrderIntegrationInterface::STATUS_FAIL])
             ->setPageSize($batchSize);
-        return $result->getItems() ?? null;
+        return $result->getItems();
     }
 }

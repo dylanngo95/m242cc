@@ -41,6 +41,7 @@ class CustomSalesShipment extends AbstractModel implements CustomSalesShipmentIn
     public function setEntityId($entity)
     {
         $this->setData(self::ENTITY_ID, $entity);
+        return $this;
     }
 
     /**

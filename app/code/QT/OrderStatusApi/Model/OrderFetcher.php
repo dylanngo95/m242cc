@@ -5,24 +5,23 @@ declare(strict_types=1);
 namespace QT\OrderStatusApi\Model;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\Collection;
 
 /**
  * Class OrderFetcher
- * @package QT\OrderStatusApi\Model
  */
 class OrderFetcher
 {
     /**
      * @var OrderRepositoryInterface
      */
-    private OrderRepositoryInterface $orderRepository;
+    private $orderRepository;
 
     /**
      * @var SearchCriteriaBuilder
      */
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
+    private $searchCriteriaBuilder;
 
     /**
      * @param OrderRepositoryInterface $orderRepository
@@ -40,27 +39,38 @@ class OrderFetcher
      * Duplicate from \Magento\SalesMessageBus\Order\Fetcher to remove dependency
      *
      * @param string $incrementId
-     * @return OrderInterface|null
+     * @return \Magento\Framework\DataObject
      */
-    public function fetchByIncrementId(string $incrementId): ?OrderInterface
+    public function fetchByIncrementId(string $incrementId)
     {
-        $searchCriteria = $this->searchCriteriaBuilder->addFilter('increment_id', $incrementId, 'eq')->create();
-        $orderList = $this->orderRepository->getList($searchCriteria)->getItems();
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter('increment_id', $incrementId, 'eq')
+            ->create();
 
-        return reset($orderList);
+        /** @var Collection $orderList */
+        $orderList = $this->orderRepository
+            ->getList($searchCriteria)
+            ->getItems();
+
+        return $orderList->getFirstItem();
     }
 
     /**
      * Duplicate from \Magento\SalesMessageBus\Order\Fetcher to remove dependency
      *
      * @param int $id
-     * @return OrderInterface|null
+     * @return \Magento\Framework\DataObject
      */
-    public function fetchById(int $id): ?OrderInterface
+    public function fetchById(int $id)
     {
-        $searchCriteria = $this->searchCriteriaBuilder->addFilter('entity_id', $id, 'eq')->create();
-        $orderList = $this->orderRepository->getList($searchCriteria)->getItems();
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter('entity_id', $id, 'eq')
+            ->create();
 
-        return count($orderList) ? reset($orderList) : null;
+        /** @var Collection $orderList */
+        $orderList = $this->orderRepository
+            ->getList($searchCriteria)
+            ->getItems();
+        return $orderList->getFirstItem();
     }
 }

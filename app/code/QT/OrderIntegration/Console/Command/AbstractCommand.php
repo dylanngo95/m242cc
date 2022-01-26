@@ -35,7 +35,7 @@ abstract class AbstractCommand extends Command
      *
      * @throws LocalizedException
      */
-    protected function setAreaIfNotDefined()
+    protected function setAreaIfNotDefined(): void
     {
         try {
             $this->state->getAreaCode();

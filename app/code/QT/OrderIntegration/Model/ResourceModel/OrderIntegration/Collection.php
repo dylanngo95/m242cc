@@ -10,7 +10,6 @@ use QT\OrderIntegration\Model\ResourceModel\OrderIntegration as ResourceModel;
 
 /**
  * Class Collection
- * @package QT\OrderIntegration\Model\ResourceModel\OrderIntegration
  */
 class Collection extends AbstractCollection
 {

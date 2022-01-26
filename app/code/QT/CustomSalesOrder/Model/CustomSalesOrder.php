@@ -41,6 +41,7 @@ class CustomSalesOrder extends AbstractModel implements CustomSalesOrderInterfac
     public function setEntityId($entityId)
     {
         $this->setData(self::ENTITY_ID, $entityId);
+        return $this;
     }
 
     /**

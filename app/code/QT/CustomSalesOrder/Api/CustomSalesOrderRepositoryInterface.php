@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace QT\CustomSalesOrder\Api;
 
+use QT\CustomSalesOrder\Model\CustomSalesOrder;
+
 /**
  * Interface CustomSalesOrderRepositoryInterface
  */
@@ -12,10 +14,10 @@ interface CustomSalesOrderRepositoryInterface
     /**
      * Save.
      *
-     * @param \QT\CustomSalesOrder\Api\CustomSalesOrderInterface $customSalesOrder
-     * @return \QT\CustomSalesOrder\Api\CustomSalesOrderInterface
+     * @param CustomSalesOrder $customSalesOrder
+     * @return CustomSalesOrder
      */
-    public function save(CustomSalesOrderInterface $customSalesOrder);
+    public function save(CustomSalesOrder $customSalesOrder);
 
     /**
      * GetById.

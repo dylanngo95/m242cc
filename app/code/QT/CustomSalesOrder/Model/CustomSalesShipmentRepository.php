@@ -21,7 +21,7 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
     private $objectResourceModel;
 
     /**
-     * @var CustomSalesOrderFactory
+     * @var ObjectModelFactory
      */
     private $objectModelFactory;
 
@@ -41,13 +41,13 @@ class CustomSalesShipmentRepository implements CustomSalesShipmentRepositoryInte
     /**
      * Save.
      *
-     * @param CustomSalesShipmentInterface $customSalesShipment
-     * @return CustomSalesShipmentInterface
+     * @param CustomSalesShipment $customSalesShipment
+     * @return CustomSalesShipment
      * @throws Exception
      */
     public function save(
-        CustomSalesShipmentInterface $customSalesShipment
-    ): CustomSalesShipmentInterface {
+        CustomSalesShipment $customSalesShipment
+    ): CustomSalesShipment {
         try {
             $this->objectResourceModel->save($customSalesShipment);
             return $customSalesShipment;
