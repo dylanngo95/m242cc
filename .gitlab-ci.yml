@@ -28,8 +28,6 @@ executing-build:
       - generated
     policy: push
   script:
-    - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
-    - composer install
     - php bin/magento module:enable --all
     - php bin/magento setup:di:compile
 
