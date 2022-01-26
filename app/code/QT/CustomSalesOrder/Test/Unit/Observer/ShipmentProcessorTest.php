@@ -49,9 +49,7 @@ class ShipmentProcessorTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->objectManager = new ObjectManager($this);
-
         $this->orderExtensionFactory = $this->createMock(OrderExtensionFactory::class);
         $this->customSalesShipmentFactory = $this->createMock(CustomSalesShipmentFactory::class);
         $this->customSalesShipmentRepository = $this->createMock(CustomSalesShipmentRepository::class);
@@ -68,7 +66,7 @@ class ShipmentProcessorTest extends TestCase
      * @covers \QT\CustomSalesOrder\Observer\ShipmentProcessor::execute
      * @throws \Magento\Framework\Webapi\Exception
      */
-    public function testExecute()
+    public function testExecute(): void
     {
         $orderId = 1;
 
@@ -107,7 +105,8 @@ class ShipmentProcessorTest extends TestCase
             ->method('getAddress')
             ->willReturn($orderAddressInterface);
 
-        $this->orderExtensionFactory->method('create')
+        $this->orderExtensionFactory
+            ->method('create')
             ->willReturn($orderExtensionAttribute);
         $orderExtensionAttribute
             ->method('getShippingAssignments')

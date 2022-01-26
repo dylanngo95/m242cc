@@ -8,6 +8,8 @@ parameters:
     checkMissingIterableValueType: false
     paths:
         - app/code
+    excludePaths:
+        - app/code/*/*/Test/*
     bootstrapFiles:
         - vendor/bitexpert/phpstan-magento/autoload.php
     magento:
