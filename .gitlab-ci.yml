@@ -9,6 +9,7 @@ cache:
     - vendor/
 
 before_script:
+  - php -v
   - composer config http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWD
   - composer install
 
