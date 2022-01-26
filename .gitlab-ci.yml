@@ -74,7 +74,7 @@ excuting-test:
       - ./coverage
     expire_in: 1 week
 
-deploy:
+excuting-deploy:
   stage: deploy
   only:
     - tags
