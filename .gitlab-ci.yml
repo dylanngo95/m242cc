@@ -32,6 +32,8 @@ executing-check-quality:
   script:
     - vendor/bin/phpcs -n --standard=dev/tests/static/framework/Magento app/code
     - vendor/bin/phpmd app/code/ text .phpmd.xml
+    - vendor/bin/phpstan --version
+    - php -v
     - vendor/bin/phpstan analyse --level=8 --configuration=.phpstan.neon app/code
 
 deploy:
