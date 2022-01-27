@@ -21,6 +21,8 @@ stages:
 
 executing-build:
   stage: build
+  only:
+    - main
   cache:
     key: caches
     paths:
@@ -32,6 +34,8 @@ executing-build:
 
 executing-check-quality:
   stage: check-quality
+  only:
+    - main
   cache:
     key: caches
     paths:
@@ -44,6 +48,8 @@ executing-check-quality:
 
 excuting-test:
   stage: test
+  only:
+    - main
   cache:
     key: caches
     paths:
@@ -60,6 +66,6 @@ excuting-test:
 excuting-deploy:
   stage: deploy
   only:
-    - tags
+    - dev
   script:
     - echo "deploy completed"
