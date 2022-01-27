@@ -68,4 +68,4 @@ excuting-deploy:
   only:
     - dev
   script:
-    - echo "deploy completed"
+    - echo "deploy dev completed"
